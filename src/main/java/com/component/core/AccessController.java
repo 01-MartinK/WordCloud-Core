@@ -25,11 +25,9 @@ import java.util.List;
 @Controller
 public class AccessController {
 
-    private final Runner runner;
     private final UserRepository userRepository;
     private final WordcloudRepository wordRepository;
-    AccessController(Runner runner, UserRepository userRepository, WordcloudRepository wordRepository) {
-        this.runner = runner;
+    AccessController(UserRepository userRepository, WordcloudRepository wordRepository) {
         this.userRepository = userRepository;
         this.wordRepository = wordRepository;
     }
@@ -46,9 +44,8 @@ public class AccessController {
 
         user.setAccessCode(wordcloud.getId());
         request.setWords(ReadFile(document));
-        List<String> excludedList = new ArrayList<>(Arrays.asList(list.split(",")));
-        if (!excludedList.isEmpty())
-            request.setExcludedWords(excludedList);
+        if (!list.isEmpty())
+            request.setExcludedWords(new ArrayList<>(Arrays.asList(list.split(","))));
 
         Runner.runner.sendMessage(new Gson().toJson(request));
 

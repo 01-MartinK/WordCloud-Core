@@ -25,6 +25,7 @@ public class Runner implements CommandLineRunner {
     public void run(String... args) throws Exception {
         System.out.println("Sending message...");
         rabbitTemplate.convertAndSend("wordcloud", "wordcloud.worker.receive", "Hello from RabbitMQ!");
+        receiver.getLatch().await(10, TimeUnit.MILLISECONDS);
     }
 
     public void sendMessage(String msg){
