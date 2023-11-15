@@ -1,4 +1,4 @@
-package com.component.core.user;
+package com.component.core.models.user;
 
 import org.springframework.data.repository.CrudRepository;
 

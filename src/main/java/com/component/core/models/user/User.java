@@ -1,9 +1,7 @@
-package com.component.core.user;
+package com.component.core.models.user;
 
-import com.component.core.wordcloud.Wordcloud;
 import jakarta.persistence.*;
 
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -11,8 +9,7 @@ public class User {
     @Id
     @GeneratedValue
     Long id;
-    @OneToOne(cascade = CascadeType.ALL, targetEntity = Wordcloud.class)
-    @JoinColumn(name = "id")
+
     private Long accessCode;
 
     public User(){}

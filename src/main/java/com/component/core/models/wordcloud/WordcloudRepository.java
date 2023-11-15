@@ -1,4 +1,4 @@
-package com.component.core.wordcloud;
+package com.component.core.models.wordcloud;
 
 import org.springframework.data.repository.CrudRepository;
 

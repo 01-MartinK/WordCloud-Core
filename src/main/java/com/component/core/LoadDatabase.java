@@ -1,7 +1,7 @@
 package com.component.core;
 
-import com.component.core.user.UserRepository;
-import com.component.core.wordcloud.WordcloudRepository;
+import com.component.core.models.user.UserRepository;
+import com.component.core.models.wordcloud.WordcloudRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
