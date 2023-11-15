@@ -1,31 +1,41 @@
 package com.component.core.user;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.component.core.wordcloud.Wordcloud;
+import jakarta.persistence.*;
 
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 public class User {
-    @Id @GeneratedValue Long id;
-    @GeneratedValue int accessCode;
+    @Id
+    @GeneratedValue
+    Long id;
+    @OneToOne(cascade = CascadeType.ALL, targetEntity = Wordcloud.class)
+    @JoinColumn(name = "id")
+    private Long accessCode;
 
     public User(){}
+
+    public void setAccessCode(Long value) {
+        this.accessCode = value;
+    }
+
+    public Long getAccessCode() {
+        return this.accessCode;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o)
             return true;
-        if (!(o instanceof User))
+        if (!(o instanceof User user))
             return false;
-        User user = (User) o;
         return Objects.equals(this.id, user.id);
     }
 
     @Override
     public String toString() {
-        return ("id: "+id+" access-code: "+accessCode);
+        return ("id: "+this.id+" access-code: "+this.accessCode);
     }
 }
