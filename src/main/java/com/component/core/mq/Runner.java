@@ -22,7 +22,7 @@ public class Runner implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) throws Exception { // Initial run no initialization
         System.out.println("Sending message...");
         rabbitTemplate.convertAndSend("wordcloud", "wordcloud.worker.receive", "Hello from RabbitMQ!");
         receiver.getLatch().await(10, TimeUnit.MILLISECONDS);

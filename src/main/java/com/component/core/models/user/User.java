@@ -4,6 +4,16 @@ import jakarta.persistence.*;
 
 import java.util.Objects;
 
+/*
+
+CREATE TABLE user(
+ id Long
+ accessCode Long
+ primary_key(id)
+);
+
+ */
+
 @Entity
 public class User {
     @Id

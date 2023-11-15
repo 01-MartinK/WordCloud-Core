@@ -38,15 +38,19 @@ public class AccessController {
         User user = new User();
         Wordcloud wordcloud = new Wordcloud();
 
+        // presave WordCloud model to get id early
         wordRepository.save(wordcloud);
 
+        // new WorkRequest to be sent to the worker
         WorkRequest request = new WorkRequest(wordcloud.getId().intValue());
 
+        // set the user accesscode for logging
         user.setAccessCode(wordcloud.getId());
         request.setWords(ReadFile(document));
         if (!list.isEmpty())
             request.setExcludedWords(new ArrayList<>(Arrays.asList(list.split(","))));
 
+        // send the message to the worker
         Runner.runner.sendMessage(new Gson().toJson(request));
 
         userRepository.save(user);
@@ -57,6 +61,7 @@ public class AccessController {
     @CrossOrigin
     @GetMapping(path = "/list/{code}")
     public ResponseEntity<Object> getWordList(@PathVariable Long code){
+        // get WordCloud from the database
         Wordcloud wordcloud = wordRepository.findById(code).get();
         return ResponseEntity.ok().body(wordcloud);
     }
@@ -64,7 +69,7 @@ public class AccessController {
     public List<String> ReadFile(MultipartFile document){
         List<String> lines = new ArrayList<>();
 
-        if (document != null)
+        if (document != null) // check if document valid
             try {
                 InputStream inputStream = document.getInputStream();
                 new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
