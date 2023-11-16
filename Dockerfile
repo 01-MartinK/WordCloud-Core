@@ -1,4 +1,4 @@
-FROM amazoncorretto:17
+FROM gradle:17
 VOLUME /tmp
-COPY target/main.jar main.jar
-ENTRYPOINT ["java","-jar","/main.jar"]
+RUN gradlew build
+CMD bootRUN
